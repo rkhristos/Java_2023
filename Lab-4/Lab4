@@ -1,0 +1,86 @@
+public class Task1 {
+    public static void main(String[] args) {
+        int[] arr1 = {15, 22, 35, 42, 55, 63, 71};
+        int[] arr2 = {14, 21, 36, 43, 56, 63, 70};
+        int[] arr3 = {1, 2, 36, 42, 56};
+        int[] arr4 = {};
+        System.out.println("1) Сума елементів, що кратні 7: " + SummOfMultOfSeven(arr1));
+        System.out.println("2) Сума елементів, що кратні 7: " + SummOfMultOfSeven(arr2));
+        System.out.println("3) Сума елементів, що кратні 7: " + SummOfMultOfSeven(arr3));
+        System.out.println("3) Сума елементів, що кратні 7: " + SummOfMultOfSeven(arr4));
+    }
+
+    public static int SummOfMultOfSeven(int[] arr) {
+        if (arr == null) {
+            throw new NullPointerException("Масив не повинен бути null.");
+        }
+
+        int summ = 0;
+        for (int number : arr) {
+            if (number % 7 == 0) summ += number;
+        }
+        return summ;
+    }
+}
+public class Task2 {
+    public static void main(String[] args) {
+        int[] arr1 = {3, -2, -5, 6, -9};
+        int[] arr2 = {-3, -6, 9, 12, -15};
+        int[] arr3 = {0, -1, -2, -3, -4, -5, -6};
+        System.out.println("1) Добуток від’ємних чисел, індекс яких кратний 3: " + ProductOfNegativesWithMultipleOfThree(arr1));
+        System.out.println("2) Добуток від’ємних чисел, індекс яких кратний 3: " + ProductOfNegativesWithMultipleOfThree(arr2));
+        System.out.println("3) Добуток від’ємних чисел, індекс яких кратний 3: " + ProductOfNegativesWithMultipleOfThree(arr3));
+    }
+
+    public static int ProductOfNegativesWithMultipleOfThree(int[] arr) {
+        if (arr == null) {
+            throw new NullPointerException("Масив не повинен бути null.");
+        }
+
+        int product = 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 0 && i % 3 == 0) {
+                product *= arr[i];
+            }
+        }
+        return product;
+    }
+}
+public class Task3 {
+    public static void main(String[] args) {
+        int[] arr1 = {-3, 0, 5, -7, 9};
+        int[] arr2 = {0, -1, -2, -3, -4, -5, -6};
+        int[] arr3 = {1, 2, 3, 4, 5};
+        int[] result1 = TransformArray(arr1);
+        int[] result2 = TransformArray(arr2);
+        int[] result3 = TransformArray(arr3);
+        System.out.println("1) Новий масив: " + Arrays.toString(result1));
+        System.out.println("2) Новий масив: " + Arrays.toString(result2));
+        System.out.println("3) Новий масив: " + Arrays.toString(result3));
+    }
+
+    public static int[] TransformArray(int[] arr) {
+        if (arr == null) {
+            throw new NullPointerException("Масив не повинен бути null.");
+        }
+
+        int max = Integer.MIN_VALUE;
+        for (int number : arr) {
+            if (number > max) {
+                max = number;
+            }
+        }
+
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 0) {
+                result[i] = arr[i] + max;
+            } else if (arr[i] == 0) {
+                result[i] = 1;
+            } else {
+                result[i] = arr[i] * 2;
+            }
+        }
+        return result;
+    }
+}
