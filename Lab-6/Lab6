@@ -1,0 +1,83 @@
+public class BinaryStringConverter {
+    public static void main(String[] args) {
+        // Приклад виклику методу з різними параметрами
+        testBinaryString("10101");  // 21
+        testBinaryString("1101");   // 13
+        testBinaryString("11111");  // 31
+        // Додайте інші тести за необхідності
+    }
+
+    public static void testBinaryString(String binaryString) {
+        try {
+            int result = binaryStringToInt(binaryString);
+            System.out.println("Binary String: " + binaryString);
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static int binaryStringToInt(String binaryString) {
+        if (binaryString == null) {
+            throw new IllegalArgumentException("Binary string cannot be null");
+        }
+
+        int result = 0;
+        int length = binaryString.length();
+
+        for (int i = 0; i < length; i++) {
+            char digit = binaryString.charAt(i);
+            if (digit != '0' && digit != '1') {
+                throw new IllegalArgumentException("Invalid binary digit at position " + i);
+            }
+            int power = length - i - 1;
+            result += (digit - '0') * Math.pow(2, power);
+        }
+
+        return result;
+    }
+}
+public class CombinationCounter {
+    public static void main(String[] args) {
+        testCombinationCount("Happy New Year 2024");  // 1
+        // Додайте інші тести за необхідності
+    }
+
+    public static void testCombinationCount(String input) {
+        try {
+            int result = countCombinations(input);
+            System.out.println("Input String: " + input);
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static int countCombinations(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Input string cannot be null");
+        }
+
+        // Використовуємо регулярний вираз для визначення комбінацій літер та цифр
+        String pattern = "[a-zA-Z0-9]+";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(input);
+
+        int count = 0;
+
+        while (matcher.find()) {
+            String match = matcher.group();
+            // Перевіряємо, чи містить комбінація і літери, і цифри
+            if (containsLettersAndDigits(match)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static boolean containsLettersAndDigits(String str) {
+        // Перевіряємо, чи містить рядок і літери, і цифри
+        return str.matches(".*[a-zA-Z].*") && str.matches(".*\\d.*");
+    }
+}
