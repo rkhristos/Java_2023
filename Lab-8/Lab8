@@ -1,0 +1,36 @@
+import java.util.Set;
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        MovieDatabase movieDatabase = new MovieDatabase();
+        movieDatabase.populateDatabase();
+
+        // Задача 1: Визначити, чи є актор, який не зіграв в жодному фільмі (типізований цикл «for-each»)
+        boolean hasActorWithoutMovies = movieDatabase.hasActorWithoutMovies();
+        System.out.println("Чи є актор, який не зіграв в жодному фільмі: " + hasActorWithoutMovies);
+
+        // Задача 2: Скласти список акторів, з якими коли-небудь в одному фільмі грав заданий актор (нетипізований ітератор)
+        Actor actor = movieDatabase.getActors().iterator().next(); // Припустимо, що це заданий актор
+        Set<Actor> coActors = movieDatabase.getCoActorsInMovies(actor);
+        System.out.println("Список акторів, з якими коли-небудь грав актор " + actor.getName() + ": " + coActors);
+
+        // Задача 3: Знайти фільм з найбільшою кількістю акторів (типізований ітератор)
+        Movie movieWithMostActors = movieDatabase.getMovieWithMostActors();
+        System.out.println("Фільм з найбільшою кількістю акторів: " + movieWithMostActors.getTitle());
+
+        // Додаткова функціональність: Додати новий фільм та акторів до бази даних
+        Movie newMovie = new Movie("New Movie");
+        Actor actor1 = new Actor("Actor 1");
+        Actor actor2 = new Actor("Actor 2");
+        Set<Actor> newActors = new HashSet<>();
+        newActors.add(actor1);
+        newActors.add(actor2);
+
+        movieDatabase.addMovieWithActors(newMovie, newActors);
+
+        // Перевірка додавання нового фільму та акторів
+        System.out.println("Фільми в базі після додавання нового: " + movieDatabase.getMovies());
+        System.out.println("Актори в базі після додавання нового: " + movieDatabase.getActors());
+    }
+}
