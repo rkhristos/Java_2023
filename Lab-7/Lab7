@@ -1,0 +1,21 @@
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        MovieDatabase movieDatabase = new MovieDatabase();
+        movieDatabase.populateDatabase();
+
+        // Задача 1: Визначити, чи є актор, який не зіграв в жодному фільмі (типізований цикл «for-each»)
+        boolean hasActorWithoutMovies = movieDatabase.hasActorWithoutMovies();
+        System.out.println("Чи є актор, який не зіграв в жодному фільмі: " + hasActorWithoutMovies);
+
+        // Задача 2: Скласти список акторів, з якими коли-небудь в одному фільмі грав заданий актор (нетипізований ітератор)
+        Actor actor = movieDatabase.getActors().get(0); // Припустимо, що це заданий актор
+        List<Actor> coActors = actor.getCoActorsInMovies();
+        System.out.println("Список акторів, з якими коли-небудь грав актор " + actor.getName() + ": " + coActors);
+
+        // Задача 3: Знайти фільм з найбільшою кількістю акторів (типізований ітератор)
+        Movie movieWithMostActors = movieDatabase.getMovieWithMostActors();
+        System.out.println("Фільм з найбільшою кількістю акторів: " + movieWithMostActors.getTitle());
+    }
+}
